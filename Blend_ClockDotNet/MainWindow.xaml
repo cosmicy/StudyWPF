@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blend_ClockDotNet"
-        xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleDataSource" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Blend_ClockDotNet.MainWindow"
+        xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleDataSource" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="Blend_ClockDotNet.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}" DataContext="{DynamicResource SampleDataSource}">
     <Window.Resources>
@@ -23,7 +23,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="textBlock" TextWrapping="NoWrap" Text="{Binding Name}" d:LayoutOverrides="Width" Style="{DynamicResource CoreTextStyle}" TextTrimming="WordEllipsis" ToolTip="{Binding Name}"/>
-                        <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
+                        <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}" Template="{DynamicResource CheckBoxControlTemplate}"/>
                     </Grid>
                 </Border>
                 <TextBlock x:Name="textBlock1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Description}" Margin="5"/>
@@ -98,6 +98,50 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <ControlTemplate x:Key="CheckBoxControlTemplate" TargetType="{x:Type CheckBox}">
+            <Grid Width="30" Background="Black">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CheckStates">
+                        <VisualState x:Name="Checked">
+                            <Storyboard>
+                                <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="textBlock">
+                                    <DiscreteStringKeyFrame KeyTime="0" Value="女"/>
+                                </StringAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFF6060"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked"/>
+                        <VisualState x:Name="Indeterminate"/>
+                    </VisualStateGroup>
+                    <VisualStateGroup x:Name="VisualStateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#19000000"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border1">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#4CFFFFFF"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <VisualStateManager.CustomVisualStateManager>
+                    <ei:ExtendedVisualStateManager/>
+                </VisualStateManager.CustomVisualStateManager>
+                <Grid x:Name="grid" Width="Auto" Background="#FF3D9FF1">
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="男" HorizontalAlignment="Center"/>
+                </Grid>
+                <Border x:Name="border" Background="#00000000"/>
+                <Border x:Name="border1" Background="#00FFFFFF"/>
+            </Grid>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
