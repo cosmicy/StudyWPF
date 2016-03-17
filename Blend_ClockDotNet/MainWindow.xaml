@@ -11,15 +11,25 @@
 
         <SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>
         <DataTemplate x:Key="PeopleListBoxTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" d:LayoutOverrides="Width" Style="{DynamicResource CoreTextStyle}"/>
-                <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
+            <Grid Height="100" Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Width="Auto" Height="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" d:LayoutOverrides="Width" Style="{DynamicResource CoreTextStyle}"/>
+                    <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
+                </Grid>
+                <TextBlock x:Name="textBlock1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Description}"/>
             </Grid>
         </DataTemplate>
+        <ItemsPanelTemplate x:Key="PeopleListItemsPanelTemplate">
+            <WrapPanel IsItemsHost="True"/>
+        </ItemsPanelTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,7 +39,7 @@
         <Border Style="{DynamicResource TitleStyle}" >
             <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}"/>
         </Border>
-        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch"/>
+        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch" ItemsPanel="{DynamicResource PeopleListItemsPanelTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 
     </Grid>
 </Window>

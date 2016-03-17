@@ -19,5 +19,6 @@
   <xs:complexType name="PersonItem">
     <xs:attribute name="Name" type="xs:string" />
     <xs:attribute name="Sex" type="xs:boolean" />
+    <xs:attribute name="Description" type="xs:string" />
   </xs:complexType>
 </xs:schema>
