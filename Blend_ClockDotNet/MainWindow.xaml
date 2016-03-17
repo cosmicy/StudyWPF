@@ -9,11 +9,7 @@
         Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}">
     <Window.Resources>
         <SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>
-        <Style x:Key="TextBlockStyle1" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="22"/>
-            <Setter Property="FontFamily" Value="SimHei"/>
-        </Style>
-        <DataTemplate x:Key="DataTemplate1">
+        <DataTemplate x:Key="PeopleListBoxTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -23,22 +19,6 @@
                 <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
             </Grid>
         </DataTemplate>
-        <FontFamily x:Key="TitleFontFamily">SimHei</FontFamily>
-        <System:Double x:Key="TitleFontSize">22</System:Double>
-        <Style x:Key="TitleTextStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontFamily" Value="{DynamicResource TitleFontFamily}"/>
-            <Setter Property="FontSize" Value="{DynamicResource TitleFontSize}"/>
-        </Style>
-        <FontFamily x:Key="CoreFontFamily">SimSun</FontFamily>
-        <System:Double x:Key="CoreFontSize">16</System:Double>
-        <Style x:Key="CoreTextStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontFamily" Value="{DynamicResource CoreFontFamily}"/>
-            <Setter Property="FontSize" Value="{DynamicResource CoreFontSize}"/>
-        </Style>
-        <Style x:Key="CheckBoxBaseStyle" TargetType="{x:Type CheckBox}">
-            <Setter Property="FontFamily" Value="{DynamicResource CoreFontFamily}"/>
-            <Setter Property="FontSize" Value="{DynamicResource CoreFontSize}"/>
-        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -46,7 +26,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="textBlock" Text="人员列表" Margin="10" Style="{DynamicResource TitleTextStyle}"/>
-        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource DataTemplate1}" HorizontalContentAlignment="Stretch"/>
+        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch"/>
 
     </Grid>
 </Window>

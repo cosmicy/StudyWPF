@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:Blend_ClockDotNet"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CoreStyle.xaml"/>
+                <ResourceDictionary Source="Styles/BaseStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
