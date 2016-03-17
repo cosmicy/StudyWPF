@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Blend_ClockDotNet"
         xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleDataSource" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Blend_ClockDotNet.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}">
+        Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}" DataContext="{DynamicResource SampleDataSource}">
     <Window.Resources>
 
         <SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>
@@ -16,20 +16,88 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Width="Auto" Height="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" d:LayoutOverrides="Width" Style="{DynamicResource CoreTextStyle}"/>
-                    <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
-                </Grid>
-                <TextBlock x:Name="textBlock1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Description}"/>
+                <Border Width="Auto" Height="Auto" Style="{DynamicResource SubtitleStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlock" TextWrapping="NoWrap" Text="{Binding Name}" d:LayoutOverrides="Width" Style="{DynamicResource CoreTextStyle}" TextTrimming="WordEllipsis" ToolTip="{Binding Name}"/>
+                        <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
+                    </Grid>
+                </Border>
+                <TextBlock x:Name="textBlock1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Description}" Margin="5"/>
             </Grid>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="PeopleListItemsPanelTemplate">
             <WrapPanel IsItemsHost="True"/>
         </ItemsPanelTemplate>
+        <Style x:Key="SubtitleStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="#FF4BEEE6"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+        <Style x:Key="PeopleListItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="5" BorderBrush="#FF3D79F9">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -39,7 +107,7 @@
         <Border Style="{DynamicResource TitleStyle}" >
             <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}"/>
         </Border>
-        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch" ItemsPanel="{DynamicResource PeopleListItemsPanelTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch" ItemsPanel="{DynamicResource PeopleListItemsPanelTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource PeopleListItemStyle}"/>
 
     </Grid>
 </Window>
