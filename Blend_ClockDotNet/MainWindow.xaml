@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}">
     <Window.Resources>
+
         <SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>
         <DataTemplate x:Key="PeopleListBoxTemplate">
             <Grid>
@@ -25,7 +26,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock" Text="人员列表" Margin="10" Style="{DynamicResource TitleTextStyle}"/>
+        <Border Style="{DynamicResource TitleStyle}" >
+            <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}"/>
+        </Border>
         <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch"/>
 
     </Grid>
