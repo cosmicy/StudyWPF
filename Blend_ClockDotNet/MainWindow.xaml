@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Blend_ClockDotNet"
         xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleDataSource" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="Blend_ClockDotNet.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}" DataContext="{DynamicResource SampleDataSource}">
+        Title="MainWindow" Height="503" Width="678" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}" DataContext="{DynamicResource SampleDataSource}">
     <Window.Resources>
 
         <SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>
@@ -148,12 +148,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
-        <Border Style="{DynamicResource TitleStyle}" >
-            <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}" MouseDown="textBlock_MouseDown"/>
+        <Border Style="{DynamicResource TitleStyle}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" >
+            <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}"/>
         </Border>
-        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch" ItemsPanel="{DynamicResource PeopleListItemsPanelTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource PeopleListItemStyle}"/>
+        <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch" ItemsPanel="{DynamicResource PeopleListItemsPanelTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource PeopleListItemStyle}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <Button x:Name="button" Content="自定义Grid" HorizontalAlignment="Left" Margin="20,17.79,0,10" Grid.Row="2" Width="75" Click="button_Click" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <Button x:Name="button1" Content="幕布" HorizontalAlignment="Left" Margin="116,17.79,0,10" Grid.Row="2" Width="75" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Click="button1_Click"/>
 
     </Grid>
 </Window>

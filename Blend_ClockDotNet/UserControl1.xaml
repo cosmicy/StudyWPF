@@ -13,18 +13,18 @@
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="83"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="131"/>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="132*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock" Grid.RowSpan="3" Grid.ColumnSpan="7">
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock" Grid.RowSpan="3" Grid.ColumnSpan="3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <TextBlock.Background>
                 <ImageBrush ImageSource="default_project.png"/>
             </TextBlock.Background>
         </TextBlock>
 
-        <Rectangle Fill="#3F0808E2" Stroke="Black" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock" Grid.Column="2">
+        <Rectangle Fill="#3F0808E2" Stroke="Black" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock" Grid.Column="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <TextBlock.Background>
                 <ImageBrush ImageSource="button_loc_up.png" Stretch="None" TileMode="FlipX" Opacity="0.5"/>
             </TextBlock.Background>
