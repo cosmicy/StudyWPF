@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blend_ClockDotNet"
-        xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleDataSource" x:Class="Blend_ClockDotNet.MainWindow"
+        xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleDataSource" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Blend_ClockDotNet.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignData /SampleData/SampleDataSource/SampleDataSource.xaml}">
     <Window.Resources>
@@ -19,17 +19,33 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" d:LayoutOverrides="Width"/>
-                <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}"/>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" d:LayoutOverrides="Width" Style="{DynamicResource CoreTextStyle}"/>
+                <CheckBox x:Name="checkBox" Content="男" Grid.Column="1" d:LayoutOverrides="Width" IsChecked="{Binding Sex}" Style="{DynamicResource CheckBoxBaseStyle}"/>
             </Grid>
         </DataTemplate>
+        <FontFamily x:Key="TitleFontFamily">SimHei</FontFamily>
+        <System:Double x:Key="TitleFontSize">22</System:Double>
+        <Style x:Key="TitleTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="{DynamicResource TitleFontFamily}"/>
+            <Setter Property="FontSize" Value="{DynamicResource TitleFontSize}"/>
+        </Style>
+        <FontFamily x:Key="CoreFontFamily">SimSun</FontFamily>
+        <System:Double x:Key="CoreFontSize">16</System:Double>
+        <Style x:Key="CoreTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="{DynamicResource CoreFontFamily}"/>
+            <Setter Property="FontSize" Value="{DynamicResource CoreFontSize}"/>
+        </Style>
+        <Style x:Key="CheckBoxBaseStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="FontFamily" Value="{DynamicResource CoreFontFamily}"/>
+            <Setter Property="FontSize" Value="{DynamicResource CoreFontSize}"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock" Text="人员列表" Margin="10" Style="{DynamicResource TextBlockStyle1}"/>
+        <TextBlock x:Name="textBlock" Text="人员列表" Margin="10" Style="{DynamicResource TitleTextStyle}"/>
         <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource DataTemplate1}" HorizontalContentAlignment="Stretch"/>
 
     </Grid>
