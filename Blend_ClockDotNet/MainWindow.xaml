@@ -99,8 +99,29 @@
             </Setter>
         </Style>
         <ControlTemplate x:Key="CheckBoxControlTemplate" TargetType="{x:Type CheckBox}">
-            <Grid Width="30" Background="Black">
+            <Grid Width="30">
                 <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0"/>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border1">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
                     <VisualStateGroup x:Name="CheckStates">
                         <VisualState x:Name="Checked">
                             <Storyboard>
@@ -108,38 +129,19 @@
                                     <DiscreteStringKeyFrame KeyTime="0" Value="女"/>
                                 </StringAnimationUsingKeyFrames>
                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
-                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFF6060"/>
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FFF59A91"/>
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </VisualState>
                         <VisualState x:Name="Unchecked"/>
                         <VisualState x:Name="Indeterminate"/>
                     </VisualStateGroup>
-                    <VisualStateGroup x:Name="VisualStateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
-                        <VisualState x:Name="Pressed">
-                            <Storyboard>
-                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
-                                    <EasingColorKeyFrame KeyTime="0" Value="#19000000"/>
-                                </ColorAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border1">
-                                    <EasingColorKeyFrame KeyTime="0" Value="#4CFFFFFF"/>
-                                </ColorAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <VisualStateManager.CustomVisualStateManager>
-                    <ei:ExtendedVisualStateManager/>
-                </VisualStateManager.CustomVisualStateManager>
-                <Grid x:Name="grid" Width="Auto" Background="#FF3D9FF1">
+                <Grid x:Name="grid" Width="Auto" Background="#FF91BFF5">
                     <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="男" HorizontalAlignment="Center"/>
                 </Grid>
-                <Border x:Name="border" Background="#00000000"/>
-                <Border x:Name="border1" Background="#00FFFFFF"/>
+                <Border x:Name="border" Background="Black" Opacity="0"/>
+                <Border x:Name="border1" Background="White" Opacity="0"/>
             </Grid>
         </ControlTemplate>
     </Window.Resources>
