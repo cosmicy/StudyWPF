@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace Blend_ClockDotNet
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// UserControl1.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserControl1 : UserControl
     {
-        public MainWindow()
+        public UserControl1()
         {
             InitializeComponent();
-        }
-
-        private void textBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Window1 w = new Window1();
-            w.Show();
         }
     }
 }

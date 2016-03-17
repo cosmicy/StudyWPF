@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Blend_ClockDotNet
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// Window1.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Window1 : Window
     {
-        public MainWindow()
+        public Window1()
         {
             InitializeComponent();
-        }
-
-        private void textBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Window1 w = new Window1();
-            w.Show();
         }
     }
 }

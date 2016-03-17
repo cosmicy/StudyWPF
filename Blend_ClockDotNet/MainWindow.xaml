@@ -151,7 +151,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Style="{DynamicResource TitleStyle}" >
-            <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}"/>
+            <TextBlock x:Name="textBlock" Text="人员列表" Style="{DynamicResource TitleTextStyle}" MouseDown="textBlock_MouseDown"/>
         </Border>
         <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Person}" ItemTemplate="{DynamicResource PeopleListBoxTemplate}" HorizontalContentAlignment="Stretch" ItemsPanel="{DynamicResource PeopleListItemsPanelTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource PeopleListItemStyle}"/>
 
